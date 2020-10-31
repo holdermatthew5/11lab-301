@@ -41,3 +41,5 @@ This project uses:
 10-31-2020 1:03pm - App is created
 
 ## Credits and Collaborations
+
+Meyerweb.com gave us the code for our reset.css.
