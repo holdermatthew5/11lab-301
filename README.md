@@ -13,6 +13,12 @@ Start time: 1:03pm
 Finish time: 2:40pm
 Actual time needed to complete: 1hr 37min
 
+Number and name of feature: Feature #2 - Form
+Estimate of time needed to complete: 45min
+Start time: 2:50pm
+Finish time: 5:30pm
+Actual time needed to complete: 2hr 20min
+
 ## Getting Started
 
 ## Architecture
@@ -34,6 +40,7 @@ This project uses:
 
 10-31-2020 1:03pm - App is created.
 10-31-2020 2:40pm - HTML rendered to page and css connected.
+10-31-2020 5:40pm - Form now sends useful data to server.
 
 ## Credits and Collaborations
 
