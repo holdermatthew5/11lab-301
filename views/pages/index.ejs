@@ -10,15 +10,24 @@
 
   <body>
     <header>
-      <h1>We're running!</h1>
+      <h1>Search Results</h1>
     </header>
 
     <main>
-      <p>main</p>
+      <ul>
+        <% books.forEach(book => { %>
+          <li>
+            <p>Title: <%= book.title %> </p>
+            <p> <%= book.subtitle %> </p>
+            <p>Author: <%= book.authors %> </p>
+            <img src="<%= book.image %>">
+            <p>Language: <%= book.lang %> </p>
+            <p>Summary: <%= book.description %> </p>
+            <p>Genre: <%= book.categories %> </p>
+          </li>
+        <% }) %>
+      </ul>
     </main>
 
-    <footer>
-      <p>footer</p>
-    </footer>
   </body>
 </html>

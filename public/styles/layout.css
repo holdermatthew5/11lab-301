@@ -1,0 +1,44 @@
+@media screen and (max-width: 500px) {
+  /* ----------header---------- */
+  header {
+    width: 100%;
+    height: 100px;
+    background-color: black;
+    display: grid;
+    grid-template-columns: 7.5% 30% 1fr 20%;
+    grid-template-rows: 25% 50% 25%;
+  }
+  
+  /* ----------main---------- */
+  main {
+    height: 800px;
+    background-color: darkgrey;
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 10% 50% 30% 10%;
+  }
+  
+  /* new.ejs */
+  form {
+    grid-area: 2/2/3/3;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 7% 18% 7% 18% 7% 18% 7% 18%;
+  }
+
+  /* labels and inputs */
+  label {
+    color: black;
+  }
+
+  #authorL, #titleL {
+    grid-area: 1/1/4/2;
+  }
+
+  #author, #title {
+    grid-area: 2/2/3/3;
+  }
+
+  /* index.ejs */
+  
+}
