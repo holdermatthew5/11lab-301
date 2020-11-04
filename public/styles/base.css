@@ -1,0 +1,8 @@
+@media screen and (max-width: 500px) {
+  body {
+  width: auto;
+  margin: auto;
+  text-align: center;
+  background-color: rgb(13, 18, 22);
+  }
+}

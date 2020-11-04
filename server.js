@@ -19,18 +19,17 @@ app.get('/', (request, response) => {
 });
 
 function search(request, response) {
-  response.status(200).render('pages/index.ejs');
   let searchType = `in${request.body.choice}`;
   let searchQuery = request.body.search_query;
   let url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+${searchType}`;
   superagent.get(url).then(data => {
-    // console.log(data.body.items[0].volumeInfo);
     let items = data.body.items;
     let books = items.map(obj => new Book(obj.volumeInfo));
-    response.send(books);
+    response.status(200).render('pages/index', {'books': books});
   })
   .catch ((error) => {
     console.log(error);
+    response.render('pages/error', error);
   });
 }
 
