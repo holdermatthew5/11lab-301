@@ -3,9 +3,10 @@
 let express = require('express');
 let superagent = require('superagent');
 let ejs = require('ejs');
+const pg = require('pg');
 const { response, urlencoded } = require('express');
 let app = express();
-
+const client = new pg.Client(process.env.DATABASEURL);
 require('dotenv').config();
 
 let PORT = process.env.PORT || 3000;
@@ -13,10 +14,23 @@ app.use(express.static('./public'));
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
+// non-dependency global variables
+let books = [];
+
 app.post('/show', search);
-app.get('/', (request, response) => {
-  response.render('pages/index');
-});
+app.get('/', home);
+
+function home(request, response) {
+  const select = `SELECT * FROM books;`
+  books = [];
+  client.query(select).then(data => {
+    data.rows.forEach(obj => {
+      let book = new Book(obj);
+      books.push(book);
+    })
+  });
+  response.render('pages/index', {'books': books});
+}
 
 function search(request, response) {
   let searchType = `in${request.body.choice}`;
@@ -25,7 +39,7 @@ function search(request, response) {
   superagent.get(url).then(data => {
     let items = data.body.items;
     let i = 0;
-    let books = items.map(obj => {
+    books = items.map(obj => {
       let newUrl = '';
       let imgUrlArr = [];
       if (obj.volumeInfo.imageLinks.smallThumbnail[4] === ':') {
@@ -48,13 +62,11 @@ function search(request, response) {
 }
 
 function Book(obj, image) {
-  this.title = obj.title || 'This book lost it\'s title :(',
-  this.subtitle = obj.subtitle || '',
   this.authors = obj.authors || 'We\'re not really sure who wrote this one, sorry.',
-  this.description = obj.description || `We haven't heard about this one yet.`,
-  this.categories = obj.categories || 'This book doesn\'t like labels',
-  this.image = image || 'https://i.imgur.com/J5LVHEL.jpg',
-  this.lang = obj.language || 'It is written in a language... but we don\'t know which one.'
+  this.title = obj.title || 'This book lost it\'s title :(',
+  this.isbn = obj.isbn || 'Honestly, it could be anything.',
+  this.image_url = image || obj.image_url || 'https://i.imgur.com/J5LVHEL.jpg',
+  this.description = obj.description || 'We haven\'t heard about this one yet.'
 }
 
 app.listen(PORT, () => console.log(`Now listening on port ${PORT}.`));

@@ -19,16 +19,13 @@
     <div><p>Search Results</p></div>
     <ul id="ul">
       <% books.forEach(book => { %>
-      <li class="li">
-        <p>Title: <%= book.title %> </p>
-        <p> <%= book.subtitle %> </p>
-        <p>Author: <%= book.authors %> </p>
-        <img src="<%= book.image %>">
-        <p>Language: <%= book.lang %> </p>
-        <p>Summary: <%= book.description %> </p>
-        <p>Genre: <%= book.categories %> </p>
-      </li>
-      <% }) %>
+        <li class="li">
+          <p>Title: <%= book.title %> </p>
+          <p>Author: <%= book.authors %> </p>
+          <img src="<%= book.image %>">
+          <p>Summary: <%= book.description %> </p>
+        </li>
+      <% }); %>
     </ul>
     <ul id="new">
       <li id="new1"><img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img"></li>
