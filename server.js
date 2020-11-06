@@ -21,15 +21,17 @@ app.post('/show', search);
 app.get('/', home);
 
 function home(request, response) {
-  const select = `SELECT * FROM books;`
+  const select = `SELECT * FROM books;`;
+  let count = 0;
   books = [];
   client.query(select).then(data => {
+    count = data.rowCount;
     data.rows.forEach(obj => {
       let book = new Book(obj);
       books.push(book);
     })
   });
-  response.render('pages/index', {'books': books});
+  response.render('pages/index', {'books': books, 'count': count});
 }
 
 function search(request, response) {
