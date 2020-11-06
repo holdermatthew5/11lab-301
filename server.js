@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 
 app.post('/show', search);
 app.get('/', (request, response) => {
-  response.render('pages/searches/new.ejs');
+  response.render('pages/index');
 });
 
 function search(request, response) {
