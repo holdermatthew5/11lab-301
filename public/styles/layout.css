@@ -1,44 +1,50 @@
-@media screen and (max-width: 500px) {
-  /* ----------header---------- */
-  header {
-    width: 100%;
-    height: 100px;
-    background-color: black;
-    display: grid;
-    grid-template-columns: 7.5% 30% 1fr 20%;
-    grid-template-rows: 25% 50% 25%;
-  }
-  
-  /* ----------main---------- */
-  main {
-    height: 800px;
-    background-color: darkgrey;
-    display: grid;
-    grid-template-columns: 10% 80% 10%;
-    grid-template-rows: 10% 50% 30% 10%;
-  }
-  
-  /* new.ejs */
-  form {
-    grid-area: 2/2/3/3;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 7% 18% 7% 18% 7% 18% 7% 18%;
-  }
+/* ----------header---------- */
+header {
+  width: 100%;
+  height: 100px;
+  background-color: black;
+  display: grid;
+  grid-template-columns: 7.5% 30% 1fr 20%;
+  grid-template-rows: 25% 50% 25%;
+}
 
-  /* labels and inputs */
-  label {
-    color: black;
-  }
+/* ----------main---------- */
+main {
+  height: 800px;
+  background-color: rgb(124, 124, 124);
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: 10% 50% 30% 10%;
+}
 
-  #authorL, #titleL {
-    grid-area: 1/1/4/2;
-  }
+/* new.ejs */
+form {
+  grid-area: 2/2/3/3;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 7% 18% 7% 18% 7% 18% 7% 18%;
+}
 
-  #author, #title {
-    grid-area: 2/2/3/3;
-  }
+/* labels and inputs */
+label {
+  color: black;
+}
 
-  /* index.ejs */
-  
+#authorL, #titleL {
+  grid-area: 2/1/3/2;
+}
+
+#author, #title {
+  grid-area: 2/2/3/3;
+}
+
+/* index.ejs */
+
+.li {
+  background-color: rgb(14, 14, 14);
+  border: 1px solid white;
+  color: white;
+  width: 350px;
+  padding: 10px;
+  margin: 10px 10px 0px 10px;
 }

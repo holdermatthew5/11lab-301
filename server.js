@@ -24,7 +24,21 @@ function search(request, response) {
   let url = `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}+${searchType}`;
   superagent.get(url).then(data => {
     let items = data.body.items;
-    let books = items.map(obj => new Book(obj.volumeInfo));
+    let i = 0;
+    let books = items.map(obj => {
+      let newUrl = '';
+      let imgUrlArr = [];
+      if (obj.volumeInfo.imageLinks.smallThumbnail[4] === ':') {
+        for (let i = 0; i < obj.volumeInfo.imageLinks.smallThumbnail.length; i++) {
+          imgUrlArr.push(obj.volumeInfo.imageLinks.smallThumbnail[i]);
+        }
+        imgUrlArr.splice(4, 0, 's');
+        imgUrlArr.forEach(letter => newUrl += letter);
+      };
+      i++
+      console.log(imgUrlArr);
+      return new Book(obj.volumeInfo, newUrl);
+    });
     response.status(200).render('pages/index', {'books': books});
   })
   .catch ((error) => {
@@ -33,13 +47,13 @@ function search(request, response) {
   });
 }
 
-function Book(obj) {
+function Book(obj, image) {
   this.title = obj.title || 'This book lost it\'s title :(',
   this.subtitle = obj.subtitle || '',
   this.authors = obj.authors || 'We\'re not really sure who wrote this one, sorry.',
   this.description = obj.description || `We haven't heard about this one yet.`,
   this.categories = obj.categories || 'This book doesn\'t like labels',
-  this.image = obj.imageLinks.smallThumbnail || 'https://i.imgur.com/J5LVHEL.jpg',
+  this.image = image || 'https://i.imgur.com/J5LVHEL.jpg',
   this.lang = obj.language || 'It is written in a language... but we don\'t know which one.'
 }
 

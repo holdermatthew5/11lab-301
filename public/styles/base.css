@@ -1,8 +1,6 @@
-@media screen and (max-width: 500px) {
-  body {
-  width: auto;
+body {
+  width: 480px;
   margin: auto;
   text-align: center;
   background-color: rgb(13, 18, 22);
-  }
 }
