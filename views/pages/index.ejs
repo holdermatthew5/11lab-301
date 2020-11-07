@@ -2,37 +2,22 @@
 <html lang="en">
 
 <head>
-  <title>book_app</title>
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/layout.css">
-  <link rel="stylesheet" href="/styles/modules.css">
+  <%- include('../layout/head') %>
 </head>
 
 <body>
   <header>
-    <p>Best Books!</p>
-    <nav><img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="nav-bar"></nav>
+    <%- include('../layout/header') %>
   </header>
 
   <main>
     <div><p>Search Results</p></div>
-    <p>You have <%= count %> books saved.</p>
     <ul id="ul">
-      <% books.forEach(book => { %>
-        <li class="li">
-          <p>Title: <%= book.title %> </p>
-          <p>Author: <%= book.authors %> </p>
-          <img src="<%= book.image %>">
-          <p>Summary: <%= book.description %> </p>
-        </li>
-      <% }); %>
+      <%- include('searches/show') %>
     </ul>
+    <form action="/new" method="POST"><button type="submit">Search</button></form>
     <ul id="new">
-      <li id="new1"><img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img"></li>
-      <li id="new2"><img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img"></li>
-      <li id="new3"><img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img"></li>
-      <li id="new4"><img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img"></li>
+      <%- include('../layout/footer') %>
     </ul>
   </main>
 
