@@ -18,8 +18,10 @@
   },
   "homepage": "https://github.com/holdermatthew5/11lab-301#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
+    "pg": "^8.4.2",
     "superagent": "^6.1.0"
   }
 }
