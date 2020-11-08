@@ -1,7 +1,7 @@
 # book_app
 
 **Author**: Matthew Holder and Micheal Greene
-**Version**: 1.0.6
+**Version**: 1.0.7
 
 ## Overview
 
@@ -43,6 +43,12 @@ Start time: 6:30pm
 Finish time: 6:32pm
 Actual time needed to complete: 2min
 
+Number and name of feature: Feature #7 - Index
+Estimate of time needed to complete: 3hrs
+Start time: 8:00pm Thursday
+Finish time: 8:45pm Friday
+Actual time needed to finish: 6hrs
+
 ## Getting Started
 
 Since this app does not yet contain any API keys (the google books API does not require an API key), building this app on your own computer is as easy as:
@@ -77,11 +83,7 @@ This project uses:
 11-05-2020 6:00pm - Feature #3 presents the necessary data about the books found in the search to show.ejs from index.ejs by server.js (server renders index to show for users entertainment).
 11-05-2020 6:30pm - Feature #5 presents the data in a dim lightwith well contrasted text to provide optimum reading conditions for a night reader.
 11-05-2020 6:30pm - Feature #6 loads the proper file on pageload.
-
-## Credits and Collaborations
-
-Meyerweb.com gave us the code for our reset.css.
-10-31-2020 1:03pm - App is created
+11-07-2020 8:45pm - Feature #7 shows how many books the user has saved and the books themselves.
 
 ## Credits and Collaborations
 

@@ -62,7 +62,7 @@ div p {
 /* lower nav */
 #new {
   background-color: black;
-  grid-area: 4/1/5/4;
+  grid-area: 5/1/6/4;
   display: grid;
   grid-template-columns: 20% 5% 20% 5% 20% 5% 20%;
 }
@@ -90,11 +90,16 @@ div p {
 
 /* index.ejs */
 /* content box */
+#count {
+  grid-area: 2/2/3/3;
+}
+
 #ul {
-  border: 1px solid black;
-  width: 400px;
+  grid-area: 3/2/4/3;
+  background-color: rgb(94, 93, 93);
+  border-radius: 3px;
+  box-shadow: 0px 0px 5px rgb(0, 0, 0);
   margin: 36px;
-  height: 550px;
   overflow: scroll;
 }
 
@@ -120,4 +125,8 @@ div p {
 li p {
   line-height: 18px;
   margin: 5px;
+}
+
+#searchShowButton {
+  height: 20px;
 }
