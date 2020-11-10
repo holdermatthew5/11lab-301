@@ -11,16 +11,14 @@
   </header>
 
   <main>
-    <div><p>Search Results</p></div>
-    <ul id="ul">
-      <%- include('searches/show') %>
-    </ul>
-    <form action="/new" method="POST"><button type="submit">Search</button></form>
+    <%- include('../layout/detail', {'displayDetails': 'index'}) %>
+  </main>
+  
+  <footer>
     <ul id="new">
       <%- include('../layout/footer') %>
     </ul>
-  </main>
-
+  </footer>
 </body>
 
 </html>

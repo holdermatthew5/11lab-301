@@ -1,5 +1,3 @@
-DROP TABLE IF EXISTS books;
-
 CREATE TABLE books (
   id SERIAL PRIMARY KEY,
   authors VARCHAR(255),

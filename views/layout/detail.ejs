@@ -1,0 +1,53 @@
+<section id="hide">
+  <% if (displayDetails === 'show') { %>
+     
+    <form action="/">
+      <button>Return to Homepage</button>
+    </form>
+    <img src="<%= book[0].image_url %>" alt="book image">
+    <p>Title: <%= book[0].title %></p>
+    <p>Authors: <%= book[0].authors %></p>
+    <p>ISBN: <%= book[0].isbn %></p>
+    <p>Shelf: <%= book[0].shelf %></p>
+    <p>Summary: <%= book[0].description %></p>
+    <% } else if (displayDetails === 'index') { %>
+      <div><p>Home<br />Search the Google Books API</p></div>
+    <p>You have <%= count %> books saved.</p>
+    <ul id="ul">
+      <% books.forEach(book => { %>
+        <li class="li">
+          <img src="<%= book.image_url %>">
+          <p>Title: <%= book.title %> </p>
+          <p>Author: <%= book.authors %> </p>
+          <p><%= book.isbn %></p>
+          <form action="/books/<%= book.id %>">
+            <button id="searchShowButton" type="submit" name="id" method="post" value="<%= book.id %>">View details</button>
+          </form>
+        </li>
+      <% }); %>
+    </ul>
+    <form action="/new"><button type="submit">Search form</button></form>
+    <% } else { %>
+      <div><p>Search Results</p></div>
+      <ul id="ul">
+        <% books.forEach(book => { %>
+          <li class="li">
+            <img src="<%= book.image_url %>">
+            <p>Title: <%= book.title %> </p>
+            <p>Author: <%= book.authors %> </p>
+            <p>Summary: <%= book.description %> </p>
+            <form action="../books" method="POST">
+              <input type="hidden" name="title" value="<%= book.title %>">
+              <input type="hidden" name="authors" value="<%= book.authors %>">
+              <input type="hidden" name="image_url" value="<%= book.image_url %>">
+              <input type="hidden" name="isbn" value="<%= book.isbn %>">
+              <input type="hidden" name="description" value="<%= book.description %>">
+              <input type="hidden" name="shelf" value="<%= book.shelf %>">
+              <button id="searchShowButton" type="submit">Select this Book</button>
+            </form>
+          </li>
+        <% }); %>
+      </ul>
+      <% } %>
+</section>
+<!-- include('../../layout/header', {displayDetails: true}) -->
