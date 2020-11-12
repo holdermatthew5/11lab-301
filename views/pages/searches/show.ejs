@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
+  <!-- HEAD (brought in from head.ejs partial) -->
 <head>
+  <!-- TITLE -->
+  <title>Search Results</title>
+  <!-- HEAD PARTIAL -->
   <%- include('../../layout/head') %>
+  <!-- SEARCHES/SHOW SPECIFIC CSS. -->
+  <link rel="stylesheet" type="text/css" href="/styles/modules/searchShow.css">
 </head>
+
 <body>
+  <!-- HEADER (brought in from header.ejs partial) -->
   <header><%- include('../../layout/header') %></header>
 
+  <!-- MAIN (brought in from detail.ejs partial in 'else' statement) -->
   <main>
     <%- include('../../layout/detail', {'displayDetails': ''}) %>
   </main>
 
+  <!-- FOOTER (brought in from footer.ejs partial) -->
   <footer>
     <ul id="new">
       <%- include('../../layout/footer') %>
     </ul>
   </footer>
-  <script src="../../../public/js/app.js"></script>
 </body>
 </html>

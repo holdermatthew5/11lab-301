@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
+  <!-- HEAD (brought in from head.ejs partial) -->
 <head>
+  <!-- TITLE -->
   <title>Search form</title>
-  <link rel="stylesheet" href="styles/reset.css">
-  <link rel="stylesheet" href="styles/base.css">
-  <link rel="stylesheet" href="styles/layout.css">
-  <link rel="stylesheet" href="styles/modules.css">
+  <!-- HEAD PARTIAL  -->
+  <%- include('../../layout/head') %>
+  <!-- SEARCHES/NEW SPECIFIC CSS -->
+  <link rel="stylesheet" href="styles/modules/new.css">
 </head>
+
 <body>
+  <!-- HEADER (brought in from header.ejs partial). -->
   <header>
-    <p>Best Books!</p>
-    <nav><img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="book icon"></nav>
+    <%- include(../../layout/header) %>
   </header>
+
+  <!-- MAIN -->
   <main>
+
+    <!-- TITLE -->
     <div><p>Search by Title or Author</p></div>
+
+    <!-- SEARCH FORM -->
     <form action="/show" method="post">
       <input type="text" id="search" name="search_query" placeholder="Enter a title or author">
+
       <p id="authMain">
         <label for="author" id="authorL">Author</label>
         <input type="radio" id="author" name="choice" value="author">
       </p>
+
       <p id="titleMain">
         <label for="title" id="titleL">Title</label>
         <input type="radio" id="title" name="choice" value="title">
       </p>
+
       <input type="submit" value="Search the Google Books API" id="submit">
     </form>
-    <ul id="new">
-      <li id="new1">
-        <img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img">
-      </li>
-      <li id="new2">
-        <img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img">
-      </li>
-      <li id="new3">
-        <img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img">
-      </li>
-      <li id="new4">
-        <img src="https://www.freeiconspng.com/uploads/book-icon--icon-search-engine-6.png" alt="filler-image" class="img">
-      </li>
-    </ul>
   </main>
+
+  <!-- FOOTER (brought in from footer.ejs partial). -->
+  <footer>
+    <ul id="new">
+      <%- include('../../layout/footer') %>
+    </ul>
+  </footer>
 </body>
 </html>
