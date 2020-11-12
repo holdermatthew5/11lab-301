@@ -1,26 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- HEAD (brought in from head.ejs partial) -->
 <head>
   <%- include('../layout/head') %>
+  <link rel="stylesheet" href="/styles/modules/index.css">
 </head>
 
 <body>
+  <!-- HEADER (brought in from header.ejs partial) -->
   <header>
     <%- include('../layout/header') %>
   </header>
 
+  <!-- MAIN (brought in from detail partial in 'if else' statement) -->
   <main>
-    <div><p>Search Results</p></div>
-    <ul id="ul">
-      <%- include('searches/show') %>
-    </ul>
-    <form action="/new" method="POST"><button type="submit">Search</button></form>
+    <%- include('../layout/detail', {'displayDetails': 'index'}) %>
+  </main>
+
+  <!-- FOOTER (brought in from footer.ejs partial) -->
+  <footer>
     <ul id="new">
       <%- include('../layout/footer') %>
     </ul>
-  </main>
-
+  </footer>
 </body>
 
 </html>

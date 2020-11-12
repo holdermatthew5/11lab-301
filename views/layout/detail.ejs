@@ -1,0 +1,73 @@
+<!-- IF STATEMENT (drawn to books/show) -->
+<% if (displayDetails === 'show') { %>
+<section id="hide">
+
+  <!-- DISPLAYS DETAILS OF ONE SPECIFIED BOOK -->
+  <div>
+    <img src="<%= book[0].image_url %>" alt="book image">
+    <p>Title: <%= book[0].title %></p>
+    <p>Authors: <%= book[0].authors %></p>
+    <p><%= book[0].isbn %></p>
+    <p>Shelf: <%= book[0].shelf %></p>
+    <p id="summary">Summary: <%= book[0].description %></p>
+    <form action="/">
+      <button>Home</button>
+    </form>
+  </div>
+</section>
+
+<!-- ELSE IF STATEMENT (drawn to index) -->
+<% } else if (displayDetails === 'index') { %>
+<div class="pageTitle">
+  <p>Home<br />You have <%= count %> books saved.</p>
+</div>
+
+<!-- DISPLAYS ONE LI AND CHILD ELEMENTS THEREIN FOR EACH BOOK RETURNED -->
+<ul id="ul">
+  <% books.forEach(book => { %>
+  <li class="li">
+    <img src="<%= book.image_url %>">
+    <p>Title: <%= book.title %> </p>
+    <p>Author: <%= book.authors %> </p>
+    <p><%= book.isbn %></p>
+
+    <!-- BUTTON SENDS DATABASE ID OF CHOSEN BOOK TO SERVER IN ORDER TO DISPLAY DETAILS OF BOOK -->
+    <form action="/books/<%= book.id %>">
+      <button id="searchShowButton" type="submit" name="id" method="post" value="<%= book.id %>">Details</button>
+    </form>
+  </li>
+  <% }); %>
+</ul>
+
+<!-- VISIT SEARCH PAGE -->
+<form action="/new"><button type="submit">Search</button></form>
+
+<!-- ELSE STATEMENT (drawn to searches/show) -->
+<% } else { %>
+<div class="pageTitle">
+  <p>Search Results</p>
+</div>
+
+<!-- DISPLAYS ONE LI AND CHILD ELEMENTS THEREIN FOR EACH BOOK RETURNED -->
+<ul id="ul">
+  <% books.forEach(book => { %>
+  <li class="li">
+    <img src="<%= book.image_url %>">
+    <p>Title: <%= book.title %> </p>
+    <p>Author: <%= book.authors %> </p>
+    <p>Summary: <%= book.description %> </p>
+
+    <!-- HIDDEN FORM SENDS PRE-ESTABLISHED INFO ABOUT BOOK TO SERVER IN ORDER TO DISPLAY DETAILS -->
+    <form action="../books" method="POST">
+      <input type="hidden" name="title" value="<%= book.title %>">
+      <input type="hidden" name="authors" value="<%= book.authors %>">
+      <input type="hidden" name="image_url" value="<%= book.image_url %>">
+      <input type="hidden" name="isbn" value="<%= book.isbn %>">
+      <input type="hidden" name="description" value="<%= book.description %>">
+      <input type="hidden" name="shelf" value="<%= book.shelf %>">
+      <button id="searchShowButton" type="submit">Save</button>
+    </form>
+  </li>
+  <% }); %>
+</ul>
+<% } %>

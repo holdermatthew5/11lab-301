@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- HEAD (brought in by head.ejs partail) -->
+<head>
+  <!-- TITLE -->
+  <title>Details</title>
+  <!-- HEAD PARTIAL -->
+  <%- include('../../layout/head') %>
+  <!-- BOOKS/SHOW SPECIFIC CSS -->
+  <link rel="stylesheet" href="/styles/modules/booksShow.css">
+</head>
+
+<body>
+  <!-- HEADER (brought in from header.ejs partial) -->
+  <header>
+    <%- include('../../layout/header') %>
+  </header>
+
+  <!-- MAIN (brought in from detail.ejs partial in 'if' statement) -->
+  <main>
+    <%- include('../../layout/detail', {displayDetails: 'show'}) %>
+  </main>
+  
+  <!-- FOOTER (brought in from footer.ejs partial) -->
+  <footer>
+    <ul id="new">
+      <%- include('../../layout/footer') %>
+    </ul>
+  </footer>
+</body>
+
+</html>

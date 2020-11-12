@@ -1,0 +1,9 @@
+/* INDEX.EJS */
+li p {
+  line-height: 18px;
+  margin: 5px;
+}
+
+#searchShowButton {
+  height: 20px;
+}

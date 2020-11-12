@@ -6,8 +6,10 @@ let ejs = require('ejs');
 const pg = require('pg');
 const { response, urlencoded } = require('express');
 let app = express();
-const client = new pg.Client(process.env.DATABASEURL);
 require('dotenv').config();
+
+const client = new pg.Client(process.env.DATABASE_URL);
+
 
 let PORT = process.env.PORT || 3000;
 app.use(express.static('./public'));
@@ -15,26 +17,28 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 // non-dependency global variables
-let books = [];
+// use get when not making request
 
 app.get('/', home);
 app.post('/show', show);
-app.post('/books:id', booksDetail);
-app.post('/new', search);
-app.put('/books:id', edit);
+app.get('/books/:id', booksDetail);
+app.post('/books', books);
+app.get('/new', search);
+// app.put('/books:id', edit);
 
 function home(request, response) {
-  const select = `SELECT * FROM books;`;
+  const sql = `SELECT * FROM books;`;
   let count = 0;
-  books = [];
-  client.query(select).then(data => {
+  client.query(sql).then(data => {
     count = data.rowCount;
-    data.rows.forEach(obj => {
-      let book = new Book(obj);
-      books.push(book);
-    })
+    response.render('pages/index', {'books': data.rows, 'count': count});
+  }).catch((error) => {
+    console.log(error);
   });
-  response.render('pages/index', {'books': books, 'count': count});
+}
+
+function search(request, response) {
+  response.render('pages/searches/new');
 }
 
 function show(request, response) {
@@ -44,9 +48,10 @@ function show(request, response) {
   superagent.get(url).then(data => {
     let items = data.body.items;
     let img = '';
-    books = items.map(obj => {
-      let imgUrlArr = [];
+    let books = items.map(obj => {
       if (obj.volumeInfo.imageLinks.smallThumbnail[4] === ':') {
+        let imgUrlArr = [];
+        img = '';
         for (let i = 0; i < obj.volumeInfo.imageLinks.smallThumbnail.length; i++) {
           imgUrlArr.push(obj.volumeInfo.imageLinks.smallThumbnail[i]);
         }
@@ -55,10 +60,10 @@ function show(request, response) {
           img += letter;
         });
       };
-      const book = new Book(obj.volumeInfo, img);
+      const book = new Book(obj, img);
       return book;
     });
-    response.status(200).render('pages/index', {'books': books});
+    response.status(200).render('pages/searches/show', {'books': books});
   })
   .catch ((error) => {
     console.log(error);
@@ -68,23 +73,29 @@ function show(request, response) {
 
 function booksDetail(request, response) {
   console.log(request.body);
+  let bookId = request.params.id;
   const select = `SELECT * FROM books WHERE id=$1;`;
-  const safeVal = [];
-  let count = 0;
-  books = [];
-  client.query(select).then(data => {
-    count = data.rowCount;
-    data.rows.forEach(obj => {
-      let book = new Book(obj);
-      books.push(book);
-    });
+  const safeVal = [bookId];
+  client.query(select, safeVal).then(data => {
+    let book = data.rows;
+    response.render('pages/books/show', {'book': book});
   });
-
-  response.render('pages/books/detail', {'books': books});
+  
 }
 
-function search(request, response) {
-  response.render('pages/searches/new');
+function books(request, response) {
+  const obj = request.body;
+  const insert = 'INSERT INTO books (authors, title, isbn, image_url, description, shelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
+  const safeInsert = [obj.authors, obj.title, obj.isbn, obj.image_url, obj.description, obj.shelf];
+  client.query(insert, safeInsert)
+    .then(data => {
+      let newBook = data.rows[0].id;
+      response.redirect(`/books/${newBook}`);
+  })
+  // const select = 'SELECT * FROM books;';
+  // client.query(select).then(data => {
+  //   response.redirect('/books:id?id=');
+  // });
 }
 
 function edit(request, response) {
@@ -92,12 +103,12 @@ function edit(request, response) {
 }
 
 function Book(obj, image) {
-  this.id = obj.id;
-  this.authors = obj.authors || 'We\'re not really sure who wrote this one, sorry.',
-  this.title = obj.title || 'This book lost it\'s title :(',
-  this.isbn = obj.isbn || 'Honestly, it could be anything.',
+  this.authors = obj.volumeInfo.authors || 'We\'re not really sure who wrote this one, sorry.',
+  this.title = obj.volumeInfo.title || 'This book lost it\'s title :(',
+  this.isbn = `${obj.volumeInfo.industryIdentifiers[0].type}: ${obj.volumeInfo.industryIdentifiers[0].identifier}` || 'Honestly, it could be anything.',
   this.image_url = image || 'https://i.imgur.com/J5LVHEL.jpg',
-  this.description = obj.description || 'We haven\'t heard about this one yet.'
+  this.description = obj.volumeInfo.description || 'We haven\'t heard about this one yet.',
+  this.shelf = obj.volumeInfo.categories
 }
-
+client.connect();
 app.listen(PORT, () => console.log(`Now listening on port ${PORT}.`));
