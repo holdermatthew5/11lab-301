@@ -60,10 +60,11 @@ function show(request, response) {
   // REQUEST LIST OF BOOKS FROM GOOGLE BOOKS API
   superagent.get(url).then(data => {
     let items = data.body.items;
-    let img = '';
     // USE ONLY WHAT WE NEED
     let books = items.map(obj => {
       if (obj.volumeInfo.imageLinks.smallThumbnail[4] === ':') {
+        let img = '';
+        let imgUrlArr = [];
         for (let i = 0; i < obj.volumeInfo.imageLinks.smallThumbnail.length; i++) {
           imgUrlArr.push(obj.volumeInfo.imageLinks.smallThumbnail[i]);
         }
@@ -71,9 +72,9 @@ function show(request, response) {
         imgUrlArr.forEach(letter => {
           img += letter;
         });
+        const book = new Book(obj, img);
+        return book;
       };
-      const book = new Book(obj, img);
-      return book;
     });
     // RENDER SEARCH RESULTS TO PAGE
     response.status(200).render('pages/searches/show', {'books': books});
@@ -87,7 +88,7 @@ function show(request, response) {
 // BOOK DETAILS
 function booksDetail(request, response) {
   const select = `SELECT * FROM books WHERE id=$1;`;
-  const safeVal = [bookId];
+  const safeVal = [request.params.id];
   // RETRIEVE REQUESTED BOOK FROM DATABASE
   client.query(select, safeVal).then(data => {
     let book = data.rows;
