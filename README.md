@@ -1,7 +1,7 @@
 # book_app
 
 **Author**: Matthew Holder and Micheal Greene
-**Version**: 1.0.7
+**Version**: 1.1.1
 
 ## Overview
 
@@ -43,11 +43,37 @@ Start time: 6:30pm
 Finish time: 6:32pm
 Actual time needed to complete: 2min
 
+// Note: These features gave me alot of trouble and wound up bluring together, so finding a distinct time period for each one is pretty much impossible unless you assume they all started and ended at the same time which wouldn't be completely inaccurate.
+
 Number and name of feature: Feature #7 - Index
 Estimate of time needed to complete: 3hrs
 Start time: 8:00pm Thursday
 Finish time: 8:45pm Friday
 Actual time needed to finish: 6hrs
+
+Number and name of feature: Feature #8 - Detail
+Estimate of time needed to complete: 2hrs
+Start time: 8:45pm Friday
+Finish time: 9:00pm Tuesday
+Actual time needed to finish: 12hrs
+
+Number and name of feature: Feature #9 - Display
+Estimate of time needed to complete: 1hrs
+Start time: 8:45pm Friday
+Finish time: 9:00pm Tuesday
+Actual time needed to finish: 12hrs
+
+Number and name of feature: Feature #10 - Server
+Estimate of time needed to complete: 30min
+Start time: 9:00pm
+Finish time: 9:15pm
+Actual time needed to finish: 15min
+
+Number and name of feature: Feature #11 - Styling
+Estimate of time needed to complete: 3hrs
+Start time: 9:15pm Tuesday
+Finish time: 6:30pm Wednesday
+Actual time needed to finish: 5hrs
 
 ## Getting Started
 
@@ -84,6 +110,10 @@ This project uses:
 11-05-2020 6:30pm - Feature #5 presents the data in a dim lightwith well contrasted text to provide optimum reading conditions for a night reader.
 11-05-2020 6:30pm - Feature #6 loads the proper file on pageload.
 11-07-2020 8:45pm - Feature #7 shows how many books the user has saved and the books themselves.
+11-10-2020 0:00pm - Feature #8 gives the user the ability to view the details of a single book from the home page, but in a seperate page.
+11-10-2020 0:00pm - Feature #9 gives the ability to add a book to their collection from the search results page then view the details in a seperate view.
+11-11-2020 0:00pm - Feature #10 cleaned up the server.js file and created partials to help reduce repeated code.
+11-11-2020 0:00pm - Feature #11 finished up the styling and cleaned up the css files.
 
 ## Credits and Collaborations
 
